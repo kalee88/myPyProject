@@ -15,8 +15,10 @@ class Pokemon:
     def getName(self):
         return self.name
 def pokemonInformation(Pokemon):
-    return "Pokemon Name : " + Pokemon.name + " Pokemon Health: " + str(Pokemon.health)
+    return Pokemon.name + " has " + str(Pokemon.health) + " health "
 
 
 Garchomp = Pokemon("Garchomp", 5, "Dragon", 3, 5)
+Dragonite = Pokemon("Dragonite", 8, "Dragon", 3, 8)
 print(pokemonInformation(Garchomp))
+print(pokemonInformation(Dragonite))
