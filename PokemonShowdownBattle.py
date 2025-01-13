@@ -20,7 +20,9 @@ class Pokemon:
         if isinstance(other_pokemon, Pokemon):
             other_pokemon.health -= 2
             self.health += 1
-
+    
+    def perform_potion(self):
+        self.health = self.health + 2
 def pokemonInformation(pokemon):
     return f"{pokemon.name} has {pokemon.health} health"
 
@@ -34,4 +36,6 @@ Dragonite.perform_attack(Garchomp)
 # Print information about both Pokemon
 print(pokemonInformation(Garchomp))  # Garchomp's health
 print(pokemonInformation(Dragonite))  # Dragonite's health
+Garchomp.perform_potion()
+print(pokemonInformation(Garchomp))  # Garchomp's health
 
