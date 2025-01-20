@@ -1,5 +1,5 @@
 class Pokemon:
-    def __init__(self, name, health, typing, attack, currentHealth,speed):
+    def __init__(self, name, health, typing, attack, currentHealth, speed):
         self.name = name
         self.health = health
         self.typing = typing
@@ -28,7 +28,6 @@ class Pokemon:
             other_pokemon.health -= 2
             self.attack += 1
             
-        
     def perform_potion(self):
         self.health = self.health + 2
         
@@ -36,86 +35,71 @@ class Pokemon:
         self.attack = self.attack + 2
         
 def askMove(pokemon):
-    user_input = input(f"It is {pokemon.name} turn! Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost")
-    return user_input
+    user_input = input(f"It is {pokemon.name}'s turn! Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost: ")
+    
+    # Convert the input to an integer
+    return int(user_input)
     
 def pokemonInformation(pokemon):
     return f"{pokemon.name} has {pokemon.health} health and {pokemon.attack} attack power"
-
+Latios = Pokemon("Latios", 8, "Dragon", 5, 8, 4)
+Latias = Pokemon("Latias", 7, "Dragon", 6, 7, 5)
 while True:
-    Latios = Pokemon("Latios", 8, "Dragon", 5, 8, 4)
-    Latias = Pokemon("Latias", 7, "Dragon", 6, 7, 5)
-    if (Latios.speed > Latias.speed):
+    
+    if Latios.speed > Latias.speed:
         x = askMove(Latios)
-        if (x == 1):
+        if x == 1:
             Latios.perform_attack(Latias)
             print(pokemonInformation(Latias))
-        if (x == 2):
+        if x == 2:
             Latios.perform_attack2(Latias)
             print(pokemonInformation(Latias))
-        if (x == 3):
+        if x == 3:
             Latios.perform_potion()
             print(pokemonInformation(Latios))
-        if (x == 4):
+        if x == 4:
             Latios.perform_attackboost()
             print(pokemonInformation(Latios))
+        
         y = askMove(Latias)
-        if (y == 1):
+        if y == 1:
             Latias.perform_attack(Latios)
             print(pokemonInformation(Latios))
-        if (y == 2):
+        if y == 2:
             Latias.perform_attack2(Latios)
             print(pokemonInformation(Latios))
-        if (y == 3):
+        if y == 3:
             Latias.perform_potion()
             print(pokemonInformation(Latias))
-        if (y == 4):
+        if y == 4:
             Latias.perform_attackboost()
             print(pokemonInformation(Latias))
-
     else:
         y = askMove(Latias)
-        if (y == 1):
+        if y == 1:
             Latias.perform_attack(Latios)
             print(pokemonInformation(Latios))
-        if (y == 2):
+        if y == 2:
             Latias.perform_attack2(Latios)
             print(pokemonInformation(Latios))
-        if (y == 3):
+        if y == 3:
             Latias.perform_potion()
             print(pokemonInformation(Latias))
-        if (y == 4):
+        if y == 4:
             Latias.perform_attackboost()
             print(pokemonInformation(Latias))
-
+        
         x = askMove(Latios)
-        if (x == 1):
+        if x == 1:
             Latios.perform_attack(Latias)
             print(pokemonInformation(Latias))
-        if (x == 2):
+        if x == 2:
             Latios.perform_attack2(Latias)
             print(pokemonInformation(Latias))
-        if (x == 3):
+        if x == 3:
             Latios.perform_potion()
             print(pokemonInformation(Latios))
-        if (x == 4):
+        if x == 4:
             Latios.perform_attackboost()
-        print(pokemonInformation(Latios))
-        print(pokemonInformation(Latios))
-    
-'''
-# Create two Pokemon instances
-Garchomp = Pokemon("Garchomp", 5, "Dragon", 3, 5)
-Dragonite = Pokemon("Dragonite", 8, "Dragon", 3, 8)
+            print(pokemonInformation(Latios))
 
-# Dragonite attacks Garchomp
-Dragonite.perform_attack(Garchomp)
-
-# Print information about both Pokemon
-print(pokemonInformation(Garchomp))  # Garchomp's health
-print(pokemonInformation(Dragonite))  # Dragonite's health
-Garchomp.perform_potion()
-print(pokemonInformation(Garchomp))  # Garchomp's health
-Dragonite.perform_attackboost()
-print(pokemonInformation(Dragonite))  # Garchomp's health
-'''
