@@ -55,6 +55,7 @@ while True:
             Latios.perform_potion()
         if (x == 4):
             Latios.perform_attackboost()
+        print(pokemonInformation(Latios))
         y = askMove()
         if (y == 1):
             Latias.perform_attack(Latios)
@@ -64,6 +65,7 @@ while True:
             Latias.perform_potion()
         if (y == 4):
             Latias.perform_attackboost()
+        print(pokemonInformation(Latias))
     else:
         y = askMove()
         if (y == 1):
@@ -74,6 +76,7 @@ while True:
             Latias.perform_potion()
         if (y == 4):
             Latias.perform_attackboost()
+        print(pokemonInformation(Latias))
         x = askMove()
         if (x == 1):
             Latios.perform_attack(Latias)
@@ -83,8 +86,7 @@ while True:
             Latios.perform_potion()
         if (x == 4):
             Latios.perform_attackboost()
-    print(pokemonInformation(Latios))
-    print(pokemonInformation(Latias))
+        print(pokemonInformation(Latios))
     
 '''
 # Create two Pokemon instances
