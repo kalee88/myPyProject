@@ -35,8 +35,8 @@ class Pokemon:
     def perform_attackboost(self):
         self.attack = self.attack + 2
         
-def askMove():
-    user_input = input("Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost")
+def askMove(pokemon):
+    user_input = input(f"It is {pokemon.name} turn! Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost")
     return user_input
     
 def pokemonInformation(pokemon):
@@ -46,46 +46,61 @@ while True:
     Latios = Pokemon("Latios", 8, "Dragon", 5, 8, 4)
     Latias = Pokemon("Latias", 7, "Dragon", 6, 7, 5)
     if (Latios.speed > Latias.speed):
-        x = askMove()
+        x = askMove(Latios)
         if (x == 1):
             Latios.perform_attack(Latias)
+            print(pokemonInformation(Latias))
         if (x == 2):
             Latios.perform_attack2(Latias)
+            print(pokemonInformation(Latias))
         if (x == 3):
             Latios.perform_potion()
+            print(pokemonInformation(Latios))
+        if (x == 4):
+            Latios.perform_attackboost()
+            print(pokemonInformation(Latios))
+        y = askMove(Latias)
+        if (y == 1):
+            Latias.perform_attack(Latios)
+            print(pokemonInformation(Latios))
+        if (y == 2):
+            Latias.perform_attack2(Latios)
+            print(pokemonInformation(Latios))
+        if (y == 3):
+            Latias.perform_potion()
+            print(pokemonInformation(Latias))
+        if (y == 4):
+            Latias.perform_attackboost()
+            print(pokemonInformation(Latias))
+
+    else:
+        y = askMove(Latias)
+        if (y == 1):
+            Latias.perform_attack(Latios)
+            print(pokemonInformation(Latios))
+        if (y == 2):
+            Latias.perform_attack2(Latios)
+            print(pokemonInformation(Latios))
+        if (y == 3):
+            Latias.perform_potion()
+            print(pokemonInformation(Latias))
+        if (y == 4):
+            Latias.perform_attackboost()
+            print(pokemonInformation(Latias))
+
+        x = askMove(Latios)
+        if (x == 1):
+            Latios.perform_attack(Latias)
+            print(pokemonInformation(Latias))
+        if (x == 2):
+            Latios.perform_attack2(Latias)
+            print(pokemonInformation(Latias))
+        if (x == 3):
+            Latios.perform_potion()
+            print(pokemonInformation(Latios))
         if (x == 4):
             Latios.perform_attackboost()
         print(pokemonInformation(Latios))
-        y = askMove()
-        if (y == 1):
-            Latias.perform_attack(Latios)
-        if (y == 2):
-            Latias.perform_attack2(Latios)
-        if (y == 3):
-            Latias.perform_potion()
-        if (y == 4):
-            Latias.perform_attackboost()
-        print(pokemonInformation(Latias))
-    else:
-        y = askMove()
-        if (y == 1):
-            Latias.perform_attack(Latios)
-        if (y == 2):
-            Latias.perform_attack2(Latios)
-        if (y == 3):
-            Latias.perform_potion()
-        if (y == 4):
-            Latias.perform_attackboost()
-        print(pokemonInformation(Latias))
-        x = askMove()
-        if (x == 1):
-            Latios.perform_attack(Latias)
-        if (x == 2):
-            Latios.perform_attack2(Latias)
-        if (x == 3):
-            Latios.perform_potion()
-        if (x == 4):
-            Latios.perform_attackboost()
         print(pokemonInformation(Latios))
     
 '''
