@@ -1,11 +1,13 @@
+import Random
 class Pokemon:
-    def __init__(self, name, health, typing, attack, currentHealth, speed):
+    def __init__(self, name, health, typing, attack, currentHealth, speed, defense):
         self.name = name
         self.health = health
         self.typing = typing
         self.attack = attack
         self.currentHealth = currentHealth
         self.speed = speed
+        self.defense = defense
     
     def setHealth(self, health):
         self.health = health
@@ -16,23 +18,54 @@ class Pokemon:
     def getName(self):
         return self.name
     
-    def perform_attack(self, other_pokemon):
-        # Ensure `other_pokemon` is an instance of the Pokemon class
-        if isinstance(other_pokemon, Pokemon):
-            other_pokemon.health -= 2
-            self.health += 1
-    
-    def perform_attack2(self, other_pokemon):
-        # Ensure `other_pokemon` is an instance of the Pokemon class
-        if isinstance(other_pokemon, Pokemon):
-            other_pokemon.health -= 2
-            self.attack += 1
-            
     def perform_potion(self):
-        self.health = self.health + 2
-        
-    def perform_attackboost(self):
-        self.attack = self.attack + 2
+        self.currentHealth = self.currentHealth + 20
+
+    def getAttack(self):
+        return self.attack
+
+    def getDefense(self):
+        return self.defense
+
+    def getTyping(self):
+        return self.typing
+
+class Flygon(Pokemon):
+    def __init__(self, name, health, typing, attack, currentHealth, speed):
+        super().__init__(
+            name = "Flygon",
+            health = 80,
+            typing = "Dragon",
+            attack = 100,
+            currentHealth = 100
+            speed = 100
+            defense = 80
+        )
+        )
+    def Dragon_Claw(self,target):
+        damage = (80 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Dragon":
+            damage = damage*2
+        if target.getTyping() == "Steel":
+            damage = damage*.5
+        if target.getTyping() == "Fairy":
+            damage = 0
+        return damage
+
+    def Fire_Blast(self,target):
+        damage = (110 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Ice" or target.getTyping() == "Bug" or target.getTyping() == "Steel":
+            damage = damage*2
+        if target.getTyping() == "Steel":
+            damage = damage*.5
+        if target.getTyping() == "Fairy":
+            damage = 0
+        accuracy = random.randint(1,100)
+        if (accuracy > 85 and accuracy < 101):
+            damage = 0
+        return damage
+    
+flygon = Flygon()        
         
 def askMove(pokemon):
     user_input = input(f"It is {pokemon.name}'s turn! Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost: ")
@@ -42,10 +75,34 @@ def askMove(pokemon):
     
 def pokemonInformation(pokemon):
     return f"{pokemon.name} has {pokemon.health} health and {pokemon.attack} attack power"
-Latios = Pokemon("Latios", 8, "Dragon", 5, 8, 4)
-Latias = Pokemon("Latias", 7, "Dragon", 6, 7, 5)
+
 while True:
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '''
     if Latios.speed > Latias.speed:
         x = askMove(Latios)
         if x == 1:
@@ -102,4 +159,4 @@ while True:
         if x == 4:
             Latios.perform_attackboost()
             print(pokemonInformation(Latios))
-
+'''
