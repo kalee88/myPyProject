@@ -1,13 +1,13 @@
 import Random
 class Pokemon:
-    def __init__(self, name, health, typing, attack, currentHealth, speed, defense):
+    def __init__(self, name, health, typing, attack, speed, defense, ability):
         self.name = name
         self.health = health
         self.typing = typing
         self.attack = attack
-        self.currentHealth = currentHealth
         self.speed = speed
         self.defense = defense
+        self.ability = ability
     
     def setHealth(self, health):
         self.health = health
@@ -19,7 +19,7 @@ class Pokemon:
         return self.name
     
     def perform_potion(self):
-        self.currentHealth = self.currentHealth + 20
+        self.health = self.health + 20
 
     def getAttack(self):
         return self.attack
@@ -30,16 +30,28 @@ class Pokemon:
     def getTyping(self):
         return self.typing
 
+    def getSpeed(self):
+        return self.speed
+
+    def setSpeed(self, speed):
+        self.speed = speed
+
+    def setAttack(self, attack):
+        self.attack = attack
+
+    def getAbility(self):
+        return self.ability
+        
 class Flygon(Pokemon):
-    def __init__(self, name, health, typing, attack, currentHealth, speed):
+    def __init__(self, name, health, typing, attack, speed, ability):
         super().__init__(
             name = "Flygon",
             health = 80,
             typing = "Dragon",
             attack = 100,
-            currentHealth = 100
-            speed = 100
-            defense = 80
+            speed = 100,
+            defense = 80,
+            ability = "Levitate"
         )
         )
     def Dragon_Claw(self,target):
@@ -50,7 +62,8 @@ class Flygon(Pokemon):
             damage = damage*.5
         if target.getTyping() == "Fairy":
             damage = 0
-        return damage
+        damage = damage * 1.25
+        target.setHealth(target.getHealth() - damage)
 
     def Fire_Blast(self,target):
         damage = (110 * (self.getAttack() / target.getDefense())) / 50
@@ -63,8 +76,22 @@ class Flygon(Pokemon):
         accuracy = random.randint(1,100)
         if (accuracy > 85 and accuracy < 101):
             damage = 0
-        return damage
-    
+        target.setHealth(target.getHealth() - damage)
+
+    def Dragon_Dance(self):
+        if (speed < 6):
+            self.setSpeed(self.getSpeed() + 1)
+        if (attack < 6):
+            self.setAttack(self.getAttack() + 1)
+
+    def Giga_Drain(self,target):
+        damage = (75 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Water" or target.getTyping() == "Ground" or target.getTyping() == "Rock":
+            damage = damage*2
+        if target.getTyping() == "Fire" or target.getTyping() == "Grass" or target.getTyping() == "Poison" or target.getTyping() == "Flying" or target.getTyping() == "Bug" or target.getTyping() == "Dragon" or target.getTyping() == "Steel":
+            damage = damage*.5
+        target.setHealth(target.getHealth() - damage)
+        self.setHealth(target.getHealth() + damage*0.5)
 flygon = Flygon()        
         
 def askMove(pokemon):
