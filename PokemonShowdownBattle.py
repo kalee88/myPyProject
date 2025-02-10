@@ -1,4 +1,5 @@
 import Random
+isFlinch = False
 class Pokemon:
     def __init__(self, name, health, typing, attack, speed, defense, ability):
         self.name = name
@@ -53,7 +54,6 @@ class Flygon(Pokemon):
             defense = 80,
             ability = "Levitate"
         )
-        )
     def Dragon_Claw(self,target):
         damage = (80 * (self.getAttack() / target.getDefense())) / 50
         if target.getTyping() == "Dragon":
@@ -93,7 +93,56 @@ class Flygon(Pokemon):
         target.setHealth(target.getHealth() - damage)
         self.setHealth(target.getHealth() + damage*0.5)
 flygon = Flygon()        
-        
+
+
+class Baxcalibur(Pokemon):
+    def __init__(self, name, health, typing, attack, speed, ability):
+        super().__init__(
+            name = "Baxcalibur",
+            health = 115,
+            typing = "Dragon",
+            attack = 145,
+            speed = 87,
+            defense = 90,
+            ability = "Thermal Exchange/Ice Body"
+        )
+        def Glaive_Rush(self,target):
+        damage = (120 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Dragon":
+            damage = damage*2
+        if target.getTyping() == "Steel":
+            damage = damage*.5
+        if target.getTyping() == "Fairy":
+            damage = 0
+        damage = damage * 1.25
+        self.setHealth(self.getHealth() - damage*(.15))
+        target.setHealth(target.getHealth() - damage)
+
+    def Icicle_Crash(self,target):
+        global isFlinch
+        damage = (85 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Ground" or target.getTyping() == "Flying" or target.getTyping() == "Dragon":
+            damage = damage*2
+        if target.getTyping() == "Steel" or target.getTyping() == "Fire" or target.getTyping() == "Water" or target.getTyping() == "Ice":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        if (accuracy > 90 and accuracy < 101):
+            damage = 0
+        flinchChance = random.randint(1,100)
+        if (flinchChance > 70 and flinchChance < 101):
+            isFlinch = True
+        target.setHealth(target.getHealth() - damage)
+
+    def Dragon_Dance(self):
+        if (speed < 6):
+            self.setSpeed(self.getSpeed() + 1)
+        if (attack < 6):
+            self.setAttack(self.getAttack() + 1)
+
+    def Recover(self):
+        self.setHealth(self.getHealth() + self.getHealth()*0.5)
+
+
 def askMove(pokemon):
     user_input = input(f"It is {pokemon.name}'s turn! Press 1 to do attack number 1, Press 2 to do attack number 2, Press 3 to potion, Press 4 to give attack boost: ")
     
@@ -102,9 +151,13 @@ def askMove(pokemon):
     
 def pokemonInformation(pokemon):
     return f"{pokemon.name} has {pokemon.health} health and {pokemon.attack} attack power"
+#Remember to add isFlinch global variable in our simulation loop.
 
-while True:
+def battle():
+    global isFlinch
+    while self.getHealth() > 0 and opponent.getHealth() > 0:
 
+battle()
 
 
 
