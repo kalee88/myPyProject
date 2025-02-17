@@ -1,7 +1,7 @@
 import Random
 isFlinch = False
 class Pokemon:
-    def __init__(self, name, health, typing, attack, speed, defense, ability):
+    def __init__(self, name, health, typing, attack, speed, defense, ability,moves):
         self.name = name
         self.health = health
         self.typing = typing
@@ -9,6 +9,7 @@ class Pokemon:
         self.speed = speed
         self.defense = defense
         self.ability = ability
+        self.moves = moves
     
     def setHealth(self, health):
         self.health = health
@@ -42,17 +43,21 @@ class Pokemon:
 
     def getAbility(self):
         return self.ability
+
+    def getMoves(self):
+        return self.moves
         
 class Flygon(Pokemon):
     def __init__(self, name, health, typing, attack, speed, ability):
         super().__init__(
             name = "Flygon",
-            health = 80,
+            health = 200,
             typing = "Dragon",
             attack = 100,
             speed = 100,
             defense = 80,
             ability = "Levitate"
+            moves = ["Dragon_Claw", "Fire_Blast", "Dragon_Dance", "Giga_Drain"]
         )
     def Dragon_Claw(self,target):
         damage = (80 * (self.getAttack() / target.getDefense())) / 50
@@ -92,19 +97,32 @@ class Flygon(Pokemon):
             damage = damage*.5
         target.setHealth(target.getHealth() - damage)
         self.setHealth(target.getHealth() + damage*0.5)
+    def askMove():
+        while True:
+            user_input = int(input("Type 1 to do Dragon Claw, Type 2 to do Fire Blast, Type 3 to do Dragon Dance, Type 4 to do Giga Drain!"))
+            if user_input == 1:
+                return Dragon_Claw
+            if user_input == 2:
+                return Fire_Blast
+            if user_input == 3:
+                return Dragon_Dance
+            if user_input == 4:
+                return Giga_Drain
+            
 flygon = Flygon()        
 
 
 class Baxcalibur(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability):
+    def __init__(self, name, health, typing, attack, speed, ability, moves):
         super().__init__(
             name = "Baxcalibur",
-            health = 115,
+            health = 230,
             typing = "Dragon",
             attack = 145,
             speed = 87,
             defense = 90,
             ability = "Thermal Exchange/Ice Body"
+            moves = []
         )
         def Glaive_Rush(self,target):
         damage = (120 * (self.getAttack() / target.getDefense())) / 50
@@ -156,6 +174,33 @@ def pokemonInformation(pokemon):
 def battle():
     global isFlinch
     while self.getHealth() > 0 and opponent.getHealth() > 0:
+        randomPokemon = random.randint(1,2)
+        if randomPokemon == 1:
+            player = Baxcalibur()
+            opponent = Flygon()
+            if player.getSpeed() > opponent.getSpeed():
+                ourMove = player.askMove()
+                if (ourMove == "Dragon_Dance" or "Recover") : 
+                    player.ourMove()
+                else : 
+                    player.ourMove(opponent)
+        else:
+            opponent = Baxcalibur()
+            player = Flygon()
+            if player.getSpeed() > opponent.getSpeed():
+                ourMove = player.askMove()
+                if (ourMove == "Dragon_Dance") : 
+                    player.ourMove()
+                else : 
+                    player.ourMove(opponent)
+                opponentMoves = ["Glaive_Rush", "Icicle_Crash", "Dragon_Dance", "Recover"]
+                opponentMove = random.randint(0,3)
+                if opponentMove == 0:
+                    opponentMoves[opponentMove]()
+            else:
+                opponentMoves
+                
+        
 
 battle()
 
