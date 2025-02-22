@@ -111,7 +111,55 @@ class Flygon(Pokemon):
             
 flygon = Flygon()        
 
+class eevee(Pokemon):
+    def __init__(self, name, health, typing, attack, speed, ability, moves):
+        eeveelutions = ["Vaporeon", "Glaceon", "Flareon", "Leafeon", "Jolteon", "Umbreon", "Sylveon", "Espeon"]
+        eeveelutionType = ["Water", "Ice", "Fire", "Grass", "Electric", "Dark", "Fairy", "Psychic"]
+        randomEevee = eeveelutions[random.randint(0,7)]
+        randomEeveeType = eeveelutionType[random.randint(0,7)]
+        super().__init__(
+            name = randomEevee,
+            health = 300,
+            typing = randomEeveeType,
+            attack = 110,
+            speed = 110,
+            defense = 100,
+            ability = "N/A"
+            moves = []
+        )
+    def Hydro_Pump(self,target):
 
+    def Water_Pulse(self,target):
+        
+    def Blizzard(self,target):
+
+    def Ice_Fang(self,target):
+        
+    def Flare_Blitz(self,target):
+
+    def Fire_Fang(self,target):
+        
+    def Leaf_Blade(self,target):
+
+    def Magical_Leaf(self,target):
+
+    def Thunder(self,target):
+
+    def Thunder_Fang(self,target):
+        
+    def Dark_Pulse(self,target):
+
+    def Assurance(self,target):
+        
+    def Moonblast(self,target):
+
+    def Draining_Kiss(self,target):
+        
+    def Psychic(self,target):
+
+    def Psybeam(self,target):
+        
+    
 class Baxcalibur(Pokemon):
     def __init__(self, name, health, typing, attack, speed, ability, moves):
         super().__init__(
@@ -124,7 +172,7 @@ class Baxcalibur(Pokemon):
             ability = "Thermal Exchange/Ice Body"
             moves = []
         )
-        def Glaive_Rush(self,target):
+    def Glaive_Rush(self,target):
         damage = (120 * (self.getAttack() / target.getDefense())) / 50
         if target.getTyping() == "Dragon":
             damage = damage*2
