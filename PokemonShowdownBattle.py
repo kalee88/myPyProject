@@ -1,7 +1,7 @@
 import Random
 isFlinch = False
 class Pokemon:
-    def __init__(self, name, health, typing, attack, speed, defense, ability,moves):
+    def __init__(self, name, health, typing, attack, speed, defense, ability,moves,status):
         self.name = name
         self.health = health
         self.typing = typing
@@ -10,6 +10,7 @@ class Pokemon:
         self.defense = defense
         self.ability = ability
         self.moves = moves
+        self.status = status
     
     def setHealth(self, health):
         self.health = health
@@ -41,6 +42,11 @@ class Pokemon:
     def setAttack(self, attack):
         self.attack = attack
 
+    def setStatus(self, status):
+        self.status = status
+    def getStatus(self):
+        return self.status
+
     def getAbility(self):
         return self.ability
 
@@ -48,7 +54,7 @@ class Pokemon:
         return self.moves
         
 class Flygon(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability):
+    def __init__(self, name, health, typing, attack, speed, ability,status):
         super().__init__(
             name = "Flygon",
             health = 200,
@@ -58,6 +64,7 @@ class Flygon(Pokemon):
             defense = 80,
             ability = "Levitate"
             moves = ["Dragon_Claw", "Fire_Blast", "Dragon_Dance", "Giga_Drain"]
+            status = []
         )
     def Dragon_Claw(self,target):
         damage = (80 * (self.getAttack() / target.getDefense())) / 50
@@ -112,7 +119,7 @@ class Flygon(Pokemon):
 flygon = Flygon()        
 
 class eevee(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability, moves):
+    def __init__(self, name, health, typing, attack, speed, ability, moves,status):
         eeveelutions = ["Vaporeon", "Glaceon", "Flareon", "Leafeon", "Jolteon", "Umbreon", "Sylveon", "Espeon"]
         eeveelutionType = ["Water", "Ice", "Fire", "Grass", "Electric", "Dark", "Fairy", "Psychic"]
         randomEevee = eeveelutions[random.randint(0,7)]
@@ -126,15 +133,63 @@ class eevee(Pokemon):
             defense = 100,
             ability = "N/A"
             moves = []
+            status = []
         )
     def Hydro_Pump(self,target):
+        damage = (110 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Fire" or target.getTyping() == "Rock" or target.getTyping() == "Ground" or target.getTyping() == "Steel":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Grass" or target.getTyping() == "Dragon":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        if (accuracy > 80 and accuracy < 101):
+            damage = 0
+        target.setHealth(target.getHealth() - damage)
 
     def Water_Pulse(self,target):
-        
+        damage = (60 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Fire" or target.getTyping() == "Rock" or target.getTyping() == "Ground" or target.getTyping() == "Steel":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Grass" or target.getTyping() == "Dragon":
+            damage = damage*.5
+        target.setHealth(target.getHealth() - damage)
+        isFrozen = random.randint(1,5)
+        if (isFrozen == 2):
+            if not target.getAbility() == "Own Tempo":
+                target.setStatus(target.getStatus += "Frozen")
+                
     def Blizzard(self,target):
-
+        damage = (110 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Dragon" or target.getTyping() == "Ground" or target.getTyping() == "Flying":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Fire" or target.getTyping() == "Ice" or target.getTyping() == "Steel":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        if (accuracy > 70 and accuracy < 101):
+            damage = 0
+        target.setHealth(target.getHealth() - damage)
+        isFrozen = random.randint(1,10)
+        if (isFrozen == 7):
+            if not target.getTyping() == "Ice" or not target.getAbility() == "Magma Armor":
+                target.setStatus(target.getStatus += "Frozen")
+                
     def Ice_Fang(self,target):
-        
+        damage = (65 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Dragon" or target.getTyping() == "Ground" or target.getTyping() == "Flying":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Fire" or target.getTyping() == "Ice" or target.getTyping() == "Steel":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        if (accuracy > 95 and accuracy < 101):
+            damage = 0
+        target.setHealth(target.getHealth() - damage)
+        isFrozen = random.randint(1,10)
+        if (isFrozen == 7):
+            if not target.getTyping() == "Ice" or not target.getAbility() == "Magma Armor":
+                target.setStatus(target.getStatus += "Frozen")
+        isFlinch = random.randint(1,10)
+        if (isFlinch == 7):
+            target.setStatus(target.getStatus += "Flinched")
     def Flare_Blitz(self,target):
 
     def Fire_Fang(self,target):
@@ -161,7 +216,7 @@ class eevee(Pokemon):
         
     
 class Baxcalibur(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability, moves):
+    def __init__(self, name, health, typing, attack, speed, ability, moves,status):
         super().__init__(
             name = "Baxcalibur",
             health = 230,
@@ -171,6 +226,7 @@ class Baxcalibur(Pokemon):
             defense = 90,
             ability = "Thermal Exchange/Ice Body"
             moves = []
+            status = []
         )
     def Glaive_Rush(self,target):
         damage = (120 * (self.getAttack() / target.getDefense())) / 50
