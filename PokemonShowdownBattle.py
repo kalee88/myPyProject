@@ -190,20 +190,124 @@ class eevee(Pokemon):
         isFlinch = random.randint(1,10)
         if (isFlinch == 7):
             target.setStatus(target.getStatus += "Flinched")
+            
     def Flare_Blitz(self,target):
-
+        damage = (120 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Ice" or target.getTyping() == "Bug" or target.getTyping() == "Steel":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Fire" or target.getTyping() == "Dragon" or target.getTyping() == "Rock":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        self.setHealth(self.getHealth() - (damage * (1/3)))
+        isBurn = random.randint(1,10)
+        if (isBurn == 7):
+            if not target.getTyping() == "Fire" or not target.getAbility() == "Water Veil":
+                target.setStatus(target.getStatus += "Burn")
+                
     def Fire_Fang(self,target):
-        
+        damage = (65 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Grass" or target.getTyping() == "Ice" or target.getTyping() == "Bug" or target.getTyping() == "Steel":
+            damage = damage*2
+        if target.getTyping() == "Water" or target.getTyping() == "Fire" or target.getTyping() == "Dragon" or target.getTyping() == "Rock":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        if (accuracy > 95 and accuracy < 101):
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        isBurn = random.randint(1,10)
+        if (isBurn == 7):
+            if not target.getTyping() == "Fire" or not target.getAbility() == "Water Veil":
+                target.setStatus(target.getStatus += "Burn")
+        isFlinch = random.randint(1,10)
+        if (isFlinch == 7):
+            target.setStatus(target.getStatus += "Flinched")
+
     def Leaf_Blade(self,target):
-
-    def Magical_Leaf(self,target):
-
-    def Thunder(self,target):
-
-    def Thunder_Fang(self,target):
+        damage = (90 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Water" or target.getTyping() == "Ground" or target.getTyping() == "Rock":
+            damage = damage*2
+        if target.getTyping() == "Grass" or target.getTyping() == "Fire" or target.getTyping() == "Poison" or target.getTyping() == "Flying" or target.getTyping() == "Bug" or target.getTyping() == "Dragon" or target.getTyping() == "Steel":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        isCriticalHit = random.randint(1,8)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
         
+    def Magical_Leaf(self,target):
+        damage = (60 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Water" or target.getTyping() == "Ground" or target.getTyping() == "Rock":
+            damage = damage*2
+        if target.getTyping() == "Grass" or target.getTyping() == "Fire" or target.getTyping() == "Poison" or target.getTyping() == "Flying" or target.getTyping() == "Bug" or target.getTyping() == "Dragon" or target.getTyping() == "Steel":
+            damage = damage*.5
+        accuracy = random.randint(1,100)
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        
+        
+    def Thunder(self,target):
+        damage = (110 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Water" or target.getTyping() == "Flying" or target.getTyping() == "Rock":
+            damage = damage*2
+        if target.getTyping() == "Grass" or target.getTyping() == "Electric" or target.getTyping() == "Dragon":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        accuracy = random.randint(1,100)
+        if (accuracy > 70 and accuracy < 101):
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+    
+    def Thunder_Fang(self,target):
+        damage = (65 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Water" or target.getTyping() == "Flying" or target.getTyping() == "Rock":
+            damage = damage*2
+        if target.getTyping() == "Grass" or target.getTyping() == "Electric" or target.getTyping() == "Dragon":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        accuracy = random.randint(1,100)
+        if (accuracy > 95 and accuracy < 101):
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        isPara = random.randint(1,10)
+        if (isPara == 7):
+            if not target.getTyping() == "Electric" or not target.getAbility() == "Limber":
+                target.setStatus(target.getStatus += "Paralyzed")
+        isFlinch = random.randint(1,10)
+        if (isFlinch == 7):
+            target.setStatus(target.getStatus += "Flinched")
     def Dark_Pulse(self,target):
-
+        damage = (110 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Psychic" or target.getTyping() == "Ghost":
+            damage = damage*2
+        if target.getTyping() == "Fighting" or target.getTyping() == "Dark" or target.getTyping() == "Fairy":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        isFlinch = random.randint(1,20)
+        if (isFlinch == 7 or isFlinch == 14):
+            target.setStatus(target.getStatus += "Flinched")
+            
     def Assurance(self,target):
         
     def Moonblast(self,target):
