@@ -1,7 +1,7 @@
 import Random
 isFlinch = False
 class Pokemon:
-    def __init__(self, name, health, typing, attack, speed, defense, ability,moves,status):
+    def __init__(self, name, health, typing, attack, speed, defense, ability,moves,status, maxHealth):
         self.name = name
         self.health = health
         self.typing = typing
@@ -11,13 +11,17 @@ class Pokemon:
         self.ability = ability
         self.moves = moves
         self.status = status
+        self.maxHealth = maxHealth
     
     def setHealth(self, health):
         self.health = health
     
     def getHealth(self):
         return self.health
-    
+
+    def getmaxHealth(self):
+        return self.maxHealth
+        
     def getName(self):
         return self.name
     
@@ -54,7 +58,7 @@ class Pokemon:
         return self.moves
         
 class Flygon(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability,status):
+    def __init__(self, name, health, typing, attack, speed, ability,status,maxHealth):
         super().__init__(
             name = "Flygon",
             health = 200,
@@ -65,6 +69,7 @@ class Flygon(Pokemon):
             ability = "Levitate"
             moves = ["Dragon_Claw", "Fire_Blast", "Dragon_Dance", "Giga_Drain"]
             status = []
+            maxHealth = 200
         )
     def Dragon_Claw(self,target):
         damage = (80 * (self.getAttack() / target.getDefense())) / 50
@@ -119,7 +124,7 @@ class Flygon(Pokemon):
 flygon = Flygon()        
 
 class eevee(Pokemon):
-    def __init__(self, name, health, typing, attack, speed, ability, moves,status):
+    def __init__(self, name, health, typing, attack, speed, ability, moves,status,maxHealth):
         eeveelutions = ["Vaporeon", "Glaceon", "Flareon", "Leafeon", "Jolteon", "Umbreon", "Sylveon", "Espeon"]
         eeveelutionType = ["Water", "Ice", "Fire", "Grass", "Electric", "Dark", "Fairy", "Psychic"]
         randomEevee = eeveelutions[random.randint(0,7)]
@@ -134,6 +139,7 @@ class eevee(Pokemon):
             ability = "N/A"
             moves = []
             status = []
+            maxHealth = 300
         )
     def Hydro_Pump(self,target):
         damage = (110 * (self.getAttack() / target.getDefense())) / 50
@@ -309,11 +315,50 @@ class eevee(Pokemon):
             target.setStatus(target.getStatus += "Flinched")
             
     def Assurance(self,target):
+        if (target.getHealth < target.maxHealth):
+            damage = (120 * (self.getAttack() / target.getDefense())) / 50
+        else:
+            damage = (60 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Psychic" or target.getTyping() == "Ghost":
+            damage = damage*2
+        if target.getTyping() == "Fighting" or target.getTyping() == "Dark" or target.getTyping() == "Fairy":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
         
-    def Moonblast(self,target):
+        target.setHealth(target.getHealth() - damage)
 
-    def Draining_Kiss(self,target):
+    
+    def Moonblast(self,target):
+        damage = (95 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Dragon" or target.getTyping() == "Fighting" or target.getTyping() == "Dark":
+            damage = damage*2
+        if target.getTyping() == "Fire" or target.getTyping() == "Poison" or target.getTyping() == "Steel":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
         
+    def Draining_Kiss(self,target):
+        damage = (50 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Dragon" or target.getTyping() == "Fighting" or target.getTyping() == "Dark":
+            damage = damage*2
+        if target.getTyping() == "Fire" or target.getTyping() == "Poison" or target.getTyping() == "Steel":
+            damage = damage*.5
+        if target.getTyping() == "Ground":
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        healthGained = damage * .75
+        self.setHealth(self.gehttps://www.youtube.com/watch?v=Plq6DtKYrk4tHealth() + healthGained)
     def Psychic(self,target):
 
     def Psybeam(self,target):
