@@ -358,12 +358,37 @@ class eevee(Pokemon):
             damage = 1.9 * damage
         target.setHealth(target.getHealth() - damage)
         healthGained = damage * .75
-        self.setHealth(self.gehttps://www.youtube.com/watch?v=Plq6DtKYrk4tHealth() + healthGained)
-    def Psychic(self,target):
+        self.setHealth(self.getHealth() + healthGained)
+    def Psychic(self, target):
+        damage = (90 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Fighting" or target.getTyping() == "Poison":
+            damage = damage * 2
+        if target.getTyping() == "Psychic" or target.getTyping() == "Steel":
+            damage = damage * 0.5
+        if target.getTyping() == "Dark":
+            damage = 0
+        accuracy = random.randint(1, 100)
+        if accuracy > 90:
+            damage = 0
+        isCriticalHit = random.randint(1,24)
+        if (isCrticalHit == 7):
+            damage = 1.9 * damage
+        target.setHealth(target.getHealth() - damage)
+        isSpecialDefenseDrop = random.randint(1, 10)
+        if isSpecialDefenseDrop == 7:
+            target.setDefense(target.getDefense() - 1)
 
     def Psybeam(self,target):
-        
-    
+        damage = (65 * (self.getAttack() / target.getDefense())) / 50
+        if target.getTyping() == "Fighting" or target.getTyping() == "Poison":
+            damage = damage * 2
+        if target.getTyping() == "Psychic" or target.getTyping() == "Steel":
+            damage = damage * 0.5
+        if target.getTyping() == "Dark":
+            damage = 0
+        isConfused = random.randint(1,10)
+        if (isConfused == 7):
+            target.setStatus(target.getStatus += "Confused")
 class Baxcalibur(Pokemon):
     def __init__(self, name, health, typing, attack, speed, ability, moves,status):
         super().__init__(
@@ -423,7 +448,7 @@ def askMove(pokemon):
 def pokemonInformation(pokemon):
     return f"{pokemon.name} has {pokemon.health} health and {pokemon.attack} attack power"
 #Remember to add isFlinch global variable in our simulation loop.
-
+'''
 def battle():
     global isFlinch
     while self.getHealth() > 0 and opponent.getHealth() > 0:
@@ -456,7 +481,50 @@ def battle():
         
 
 battle()
+'''
 
+def battle():
+    global isFlinch
+
+    # Create two Pokemon instances
+    player = eevee("Eevee", 300, "Normal", 110, 110, "Adaptability", ["Tackle"], [], 300)
+    opponent = Flygon("Flygon", 200, "Dragon", 100, 100, "Levitate", ["Dragon_Claw", "Fire_Blast", "Dragon_Dance", "Giga_Drain"], [], 200)
+
+    # Simulate the battle
+    while player.getHealth() > 0 and opponent.getHealth() > 0:
+        print(f"{player.getName()} has {player.getHealth()} health.")
+        print(f"{opponent.getName()} has {opponent.getHealth()} health.")
+        
+        # Player's turn
+        move = int(input(f"It is {player.getName()}'s turn! Press 1 for Tackle: "))
+        if move == 1:
+            player.Tackle(opponent)
+        
+        # Check if opponent is defeated
+        if opponent.getHealth() <= 0:
+            print(f"{opponent.getName()} fainted! {player.getName()} wins!")
+            break
+        
+        # Opponent's turn
+        opponent_move = random.choice(opponent.getMoves())
+        if opponent_move == "Dragon_Claw":
+            opponent.Dragon_Claw(player)
+        elif opponent_move == "Fire_Blast":
+            opponent.Fire_Blast(player)
+        elif opponent_move == "Dragon_Dance":
+            opponent.Dragon_Dance()
+        elif opponent_move == "Giga_Drain":
+            opponent.Giga_Drain(player)
+        
+        # Check if player is defeated
+        if player.getHealth() <= 0:
+            print(f"{player.getName()} fainted! {opponent.getName()} wins!")
+            break
+
+    print("Battle over.")
+
+# Example usage:
+battle()
 
 
 
